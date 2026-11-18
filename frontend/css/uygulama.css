@@ -1,0 +1,14 @@
+/* Uygulamaya ozel stıl. temel cssden alıyorum bu bılgılerı */
+.fis {
+  background: var(--yuzey);
+  margin-block: 2rem;
+  padding: 1.5rem var(--bosluk);
+  border-radius: var(--kose);
+  border-bottom: 2px dashed var(--cizgi);
+  max-width: 420px;
+  margin-inline: auto;
+}
+.fis h1 { margin-bottom: 0.25rem; }
+.alt { color: var(--metin-soluk); margin-bottom: 1.25rem; }
+.alan { margin-bottom: 1rem; }
+[hidden] { display: none !important; }
