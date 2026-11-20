@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rezervasyonlarım · Yemekhane</title>
+  <link rel="stylesheet" href="/css/temel.css">
+  <link rel="stylesheet" href="/css/uygulama.css">
+</head>
+<body>
+  <main class="kapsayici">
+    <section class="fis genis">
+      <h1>Rezervasyonlarım</h1>
+      <p class="alt">Rezervasyonlarınızı görün, süresi dolmamış olanları iptal edin.</p>
+
+      <div class="secimler">
+        <div>
+          <label for="durumSecim">Durum</label>
+          <select id="durumSecim">
+            <option value="hepsi">Tümü</option>
+            <option value="aktif">Aktif</option>
+            <option value="kullanildi">Kullanıldı</option>
+            <option value="iptal">İptal</option>
+          </select>
+        </div>
+      </div>
+
+      <p id="bildirim" class="bildirim bildirim-hata" role="alert" hidden></p>
+
+      <ul class="rez-listesi" id="rezListesi"></ul>
+
+      <div class="eylemler" style="margin-top: 1.25rem;">
+        <a class="dugme dugme-ikincil" href="/haftalik.html">Haftalık menü</a>
+        <a class="dugme dugme-ikincil" href="/index.html">Ana sayfa</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/rezervasyonlarim.js"></script>
+</body>
+</html>

@@ -16,4 +16,29 @@ async function yap(kullaniciId, menuId) {
     };
 }
 
-module.exports = { yap };
+async function listele(kullaniciId) {
+    const satirlar = await rezervasyonRepository.kullanicininRezervasyonlari(kullaniciId);
+    return satirlar.map((s) => ({
+        id: s.id,
+        menu_id: s.menu_id,
+        tarih: s.tarih,
+        yemekhane: s.yemekhane,
+        ogun: s.ogun,
+        durum: s.durum,
+        ucret: Number(s.ucret),
+        rezervasyon_son: s.rezervasyon_son,
+        iptal_edilebilir: Boolean(Number(s.iptal_edilebilir))
+    }));
+}
+
+async function iptal(kullaniciId, rezervasyonId) {
+    const sonuc = await rezervasyonRepository.iptalEt(kullaniciId, rezervasyonId);
+    console.log(`[rezervasyon] iptal: kullanici=${kullaniciId} rezervasyon=${rezervasyonId} (iade ve bakiye kaynaktan okundu)`);
+    return {
+        rezervasyon_id: Number(sonuc.rezervasyon_id),
+        iade: Number(sonuc.iade),
+        bakiye: Number(sonuc.bakiye)
+    };
+}
+
+module.exports = { yap, listele, iptal };
