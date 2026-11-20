@@ -8,7 +8,46 @@
   max-width: 420px;
   margin-inline: auto;
 }
+.fis.genis { max-width: 640px; }
 .fis h1 { margin-bottom: 0.25rem; }
 .alt { color: var(--metin-soluk); margin-bottom: 1.25rem; }
 .alan { margin-bottom: 1rem; }
 [hidden] { display: none !important; }
+
+.eylemler { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.dugme-ikincil { background: var(--yuzey); color: var(--ana); border: 1px solid var(--ana); }
+.dugme-ikincil:hover { background: var(--zemin); color: var(--ana-koyu); }
+
+/* Menü ekranı ıcın*/
+.secimler { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-bottom: 1.25rem; }
+@media (min-width: 480px) { .secimler { grid-template-columns: 1fr 1fr; } }
+
+.menu-baslik { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem;
+               align-items: baseline; margin-bottom: 0.75rem; }
+.menu-baslik h2 { margin: 0; }
+.fiyat { color: var(--ana-koyu); font-weight: 700; }
+
+.yemek-listesi { list-style: none; margin: 0 0 1rem; padding: 0; }
+.yemek-listesi li { padding: 0.65rem 0; border-bottom: 1px solid var(--cizgi); }
+.yemek-ad { font-weight: 600; }
+.yemek-alt { color: var(--metin-soluk); font-size: var(--boyut-kucuk); }
+.rozetler { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.35rem; }
+.rozet { font-size: var(--boyut-kucuk); padding: 0.1rem 0.5rem; border-radius: 999px; }
+.rozet-vej { color: var(--basari); background: var(--basari-zemin); }
+.rozet-alerjen { color: var(--metin); background: #FBE9C2; }
+
+.toplam { display: flex; justify-content: space-between; font-weight: 700;
+          padding-top: 0.5rem; }
+
+/* Haftalık menü ve rezervasyon ıcın */
+.gun-grubu { margin-bottom: 1.25rem; }
+.gun-baslik { padding-bottom: 0.25rem; border-bottom: 2px solid var(--cizgi); }
+.menu-karti { padding: 0.75rem 0; border-bottom: 1px solid var(--cizgi); }
+.menu-karti-ust { display: flex; justify-content: space-between; gap: 0.5rem; align-items: baseline; }
+.menu-karti p { margin: 0.25rem 0 0.5rem; }
+.menu-karti-alt { display: flex; flex-wrap: wrap; justify-content: space-between;
+                  align-items: center; gap: 0.5rem; }
+.bos-yer { display: inline-block; font-weight: 700; padding: 0.1rem 0.5rem;
+           border-radius: 999px; background: #FBE9C2; color: var(--metin); }
+.bos-yer:empty { display: none; }
+@media (max-width: 479px) { .menu-karti-alt .dugme { width: 100%; } }

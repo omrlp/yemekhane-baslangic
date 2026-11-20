@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Günün Menüsü · Yemekhane</title>
+  <link rel="stylesheet" href="/css/temel.css">
+  <link rel="stylesheet" href="/css/uygulama.css">
+</head>
+<body>
+  <main class="kapsayici">
+    <section class="fis genis">
+      <h1>Günün Menüsü</h1>
+      <p class="alt" id="tarihBilgi">Yemekhane ve öğün seçin.</p>
+
+      <div class="secimler">
+        <div>
+          <label for="yemekhane">Yemekhane</label>
+          <select id="yemekhane"></select>
+        </div>
+        <div>
+          <label for="ogun">Öğün</label>
+          <select id="ogun"></select>
+        </div>
+      </div>
+
+      <p id="bildirim" class="bildirim bildirim-hata" role="alert" hidden></p>
+
+      <div id="menuAlani" hidden>
+        <div class="menu-baslik">
+          <h2 id="menuBaslik"></h2>
+          <span class="fiyat" id="menuFiyat"></span>
+        </div>
+        <ul class="yemek-listesi" id="yemekListesi"></ul>
+        <div class="toplam"><span>Toplam kalori</span><span id="toplamKalori"></span></div>
+      </div>
+
+      <div class="eylemler" style="margin-top: 1.25rem;">
+        <a class="dugme dugme-ikincil" href="/index.html">Ana sayfa</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/menu.js"></script>
+</body>
+</html>

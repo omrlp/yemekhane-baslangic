@@ -1,6 +1,7 @@
 const express = require('express');
 const redis = require('./redis');
 const authRoutes = require('./routes/authRoutes');
+const menuRoutes = require('./routes/menuRoutes');
 
 const app = express();
 const port = Number(process.env.PORT || 8000);
@@ -10,8 +11,8 @@ app.use(express.json());
 
 app.get('/api/saglik', (req, res) => res.json({ durum: 'ok' }));
 app.use('/api', authRoutes);
+app.use('/api', menuRoutes);
 
-// Bılınmyen api yolu varsa dıye
 app.use('/api', (req, res) => res.status(404).json({ hata: 'Böyle bir adres yok.' }));
 
 // Beklenmeyen hatalar ıcın
