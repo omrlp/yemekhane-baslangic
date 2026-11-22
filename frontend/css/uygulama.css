@@ -59,3 +59,15 @@
 .durum-kullanildi { color: var(--basari); background: var(--basari-zemin); }
 .durum-iptal { color: var(--metin-soluk); background: var(--zemin); }
 @media (max-width: 479px) { .rez-satiri .menu-karti-alt .dugme { width: 100%; } }
+
+/* Bakiye */
+.bakiye-kutu { display: flex; flex-direction: column; padding: 0.75rem 1rem; margin-bottom: 1.25rem;
+               background: var(--zemin); border-radius: var(--kose); }
+.bakiye-tutar { font-size: 1.75rem; color: var(--ana-koyu); }
+.yukleme-formu { margin-bottom: 1.25rem; }
+.yukleme-satiri { display: flex; gap: 0.5rem; }
+.yukleme-satiri input { flex: 1; min-width: 0; }
+.hareket-satiri { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;
+                  padding: 0.65rem 0; border-bottom: 1px solid var(--cizgi); }
+.tutar-artti { color: var(--basari); }
+.tutar-azaldi { color: var(--hata); }

@@ -1,19 +1,5 @@
 const db = require('../db');
-
-async function yordamCagir(sql, parametreler) {
-    try {
-        const [sonuc] = await db.primary.query(sql, parametreler);
-        return Array.isArray(sonuc[0]) ? sonuc[0][0] : sonuc[0];
-    } catch (hata) {
-        // 1644 Türkce hata mesajı yollucak
-        if (hata.errno === 1644) {
-            const kullaniciHatasi = new Error(hata.sqlMessage);
-            kullaniciHatasi.kullaniciHatasi = true;
-            throw kullaniciHatasi;
-        }
-        throw hata;
-    }
-}
+const { yordamCagir } = require('./yordam');
 
 const yap = (kullaniciId, menuId) =>
     yordamCagir('CALL sp_rezervasyon_yap(?, ?)', [kullaniciId, menuId]);

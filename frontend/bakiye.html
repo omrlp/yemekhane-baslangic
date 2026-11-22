@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bakiye · Yemekhane</title>
+  <link rel="stylesheet" href="/css/temel.css">
+  <link rel="stylesheet" href="/css/uygulama.css">
+</head>
+<body>
+  <main class="kapsayici">
+    <section class="fis genis">
+      <h1>Bakiye</h1>
+
+      <div class="bakiye-kutu">
+        <span class="yemek-alt">Güncel bakiyeniz</span>
+        <strong id="bakiye" class="bakiye-tutar">–</strong>
+      </div>
+
+      <form id="yuklemeFormu" class="yukleme-formu">
+        <label for="tutar">Yüklenecek tutar (TL)</label>
+        <div class="yukleme-satiri">
+          <input id="tutar" type="text" inputmode="decimal" autocomplete="off" placeholder="Örn. 100" required>
+          <button class="dugme" type="submit">Yükle</button>
+        </div>
+      </form>
+
+      <p id="bildirim" class="bildirim bildirim-hata" role="alert" hidden></p>
+
+      <h2>Hareket geçmişi</h2>
+      <ul class="rez-listesi" id="hareketListesi"></ul>
+
+      <div class="eylemler" style="margin-top: 1.25rem;">
+        <a class="dugme dugme-ikincil" href="/haftalik.html">Haftalık menü</a>
+        <a class="dugme dugme-ikincil" href="/index.html">Ana sayfa</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/bakiye.js"></script>
+</body>
+</html>
