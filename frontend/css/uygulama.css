@@ -89,3 +89,17 @@
                  min-height: 36px; margin: 0; }
 .yemek-secenek input { width: auto; flex: none; }
 @media (max-width: 479px) { .yonetim-yeni .dugme, .yonetim-formu .eylemler .dugme { width: 100%; } }
+
+/* porsiyon ve alerjensel seyler burda*/
+.menu-karti-eylem { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.porsiyon-secim { width: auto; min-height: 44px; }
+.uyari-kutu, .yemek-uyari { color: #7A4B00; background: #FFF1CC; border-left: 4px solid var(--vurgu);
+                            padding: 0.4rem 0.6rem; border-radius: var(--kose);
+                            font-size: var(--boyut-kucuk); margin-top: 0.4rem; }
+.yemek-uyarili { background: #FFFAEB; }
+.alerjen-listesi { display: grid; grid-template-columns: 1fr; gap: 0.1rem; margin-bottom: 1rem; }
+@media (min-width: 480px) { .alerjen-listesi { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 479px) {
+  .menu-karti-eylem { width: 100%; }
+  .menu-karti-eylem .porsiyon-secim, .menu-karti-eylem .dugme { width: 100%; }
+}

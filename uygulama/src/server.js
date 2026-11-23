@@ -6,6 +6,8 @@ const rezervasyonRoutes = require('./routes/rezervasyonRoutes');
 const bakiyeRoutes = require('./routes/bakiyeRoutes');
 const degerlendirmeRoutes = require('./routes/degerlendirmeRoutes');
 const yonetimRoutes = require('./routes/yonetimRoutes');
+const profilRoutes = require('./routes/profilRoutes');
+const menuServisi = require('./services/menuServisi');
 
 const app = express();
 const port = Number(process.env.PORT || 8000);
@@ -20,6 +22,7 @@ app.use('/api', rezervasyonRoutes);
 app.use('/api', bakiyeRoutes);
 app.use('/api', degerlendirmeRoutes);
 app.use('/api', yonetimRoutes);
+app.use('/api', profilRoutes);
 
 app.use('/api', (req, res) => res.status(404).json({ hata: 'Böyle bir adres yok.' }));
 
@@ -31,6 +34,7 @@ app.use((hata, req, res, next) => {
 
 async function baslat() {
     await redis.connect();
+    await menuServisi.eskiKayitlariTemizle();
     app.listen(port, () => console.log(`Uygulama ${port} portunda dinleniyor`));
 }
 

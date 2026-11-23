@@ -36,7 +36,7 @@ function satirOlustur(kayit) {
 
     const bilgi = document.createElement('div');
     bilgi.className = 'yemek-alt';
-    bilgi.textContent = `${kayit.yemekhane} · ${paraYaz(kayit.ucret)}`;
+    bilgi.textContent = `${kayit.yemekhane} · ${kayit.porsiyon === 'yarim' ? 'Yarım porsiyon' : 'Tam porsiyon'} · ${paraYaz(kayit.ucret)}`;
 
     satir.append(ust, bilgi);
 

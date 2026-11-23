@@ -16,4 +16,19 @@ async function yordamCagir(sql, parametreler) {
     }
 }
 
-module.exports = { yordamCagir };
+async function islemYap(isle) {
+    const baglanti = await db.primary.getConnection();
+    try {
+        await baglanti.beginTransaction();
+        const sonuc = await isle(baglanti);
+        await baglanti.commit();
+        return sonuc;
+    } catch (hata) {
+        await baglanti.rollback();
+        throw hata;
+    } finally {
+        baglanti.release();
+    }
+}
+
+module.exports = { yordamCagir, islemYap };

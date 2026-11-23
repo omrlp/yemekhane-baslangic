@@ -42,6 +42,24 @@ function bosYerYaz(eleman, bosYer) {
     eleman.textContent = bosYer === null ? '' : `Boş yer: ${bosYer}`;
 }
 
+function porsiyonSecimiOlustur(menu) {
+    const secim = document.createElement('select');
+    secim.className = 'porsiyon-secim';
+    secim.setAttribute('aria-label', 'Porsiyon');
+    const tam = new Option(`Tam porsiyon · ${paraYaz(menu.fiyat)}`, 'tam');
+    const yarim = new Option(`Yarım porsiyon · ${paraYaz(menu.yarim_fiyat)}`, 'yarim');
+    secim.append(tam, yarim);
+    return secim;
+}
+
+function uyariKutusuOlustur(uyarilar) {
+    const kutu = document.createElement('div');
+    kutu.className = 'uyari-kutu';
+    const parcalar = uyarilar.map((u) => `${u.yemek} (${u.alerjenler.join(', ')})`);
+    kutu.textContent = `⚠ Alerjen uyarısı: ${parcalar.join('; ')}`;
+    return kutu;
+}
+
 function kartOlustur(menu) {
     const kart = document.createElement('div');
     kart.className = 'menu-karti';
@@ -73,32 +91,57 @@ function kartOlustur(menu) {
     const dugme = document.createElement('button');
     dugme.type = 'button';
     dugme.className = 'dugme';
-    dugmeDurumu(dugme, menu);
+
+    //yarım porsıyon saadece fıyat gonderıldıyse secılıyo o yuzden kahvaltı secılemıyo.
+    const porsiyonSecim = menu.yarim_fiyat !== null ? porsiyonSecimiOlustur(menu) : null;
+    const durumuYenile = () => {
+        dugmeDurumu(dugme, menu);
+        if (porsiyonSecim) porsiyonSecim.disabled = dugme.disabled;
+    };
+    durumuYenile();
+
+    if (porsiyonSecim) {
+        porsiyonSecim.addEventListener('change', () => {
+            fiyat.textContent = paraYaz(porsiyonSecim.value === 'yarim' ? menu.yarim_fiyat : menu.fiyat);
+        });
+    }
 
     dugme.addEventListener('click', async () => {
         dugme.disabled = true;
+        if (porsiyonSecim) porsiyonSecim.disabled = true;
         try {
             const sonuc = await apiIstek('/rezervasyon', {
                 method: 'POST',
-                body: JSON.stringify({ menu_id: menu.menu_id })
+                body: JSON.stringify({
+                    menu_id: menu.menu_id,
+                    porsiyon: porsiyonSecim ? porsiyonSecim.value : 'tam'
+                })
             });
             //replika gecıkmesı olmasn dıye kaynaktan getırdım
             if (sonuc.bos_yer !== null) bosYerYaz(bosYer, sonuc.bos_yer);
             menu.rezerve = true;
-            dugmeDurumu(dugme, menu);
+            durumuYenile();
+            const porsiyonAdi = sonuc.porsiyon === 'yarim' ? 'Yarım porsiyon' : 'Tam porsiyon';
             bildirimGoster(
-                `Rezervasyon yapıldı. Ücret: ${paraYaz(sonuc.ucret)} · Yeni bakiyeniz: ${paraYaz(sonuc.bakiye)}`,
+                `Rezervasyon yapıldı (${porsiyonAdi}). Ücret: ${paraYaz(sonuc.ucret)} · Yeni bakiyeniz: ${paraYaz(sonuc.bakiye)}`,
                 true
             );
         } catch (e) {
             if (e.durum === 401) { window.location.href = '/index.html'; return; }
-            bildirimGoster(e.message, false); // procedure mesajı burda
-            dugmeDurumu(dugme, menu);
+            bildirimGoster(e.message, false); 
+            durumuYenile();
         }
     });
 
-    alt.append(bilgi, dugme);
-    kart.append(ust, yemekler, alt);
+    const eylem = document.createElement('div');
+    eylem.className = 'menu-karti-eylem';
+    if (porsiyonSecim) eylem.appendChild(porsiyonSecim);
+    eylem.appendChild(dugme);
+
+    alt.append(bilgi, eylem);
+    kart.append(ust, yemekler);
+    if (menu.uyarilar.length > 0) kart.appendChild(uyariKutusuOlustur(menu.uyarilar));
+    kart.appendChild(alt);
     return kart;
 }
 

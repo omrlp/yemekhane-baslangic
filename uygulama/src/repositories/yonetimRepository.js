@@ -1,4 +1,5 @@
 const db = require('../db');
+const { islemYap } = require('./yordam');
 
 //duzenlenebılır olup olmadıgına bakıyoruz
 const SATIR_SQL = `
@@ -61,21 +62,6 @@ async function tarihGecmisMi(tarih) {
     return Boolean(Number(satirlar[0].gecmis));
 }
 
-
-async function islemYap(isle) {
-    const baglanti = await db.primary.getConnection();
-    try {
-        await baglanti.beginTransaction();
-        const sonuc = await isle(baglanti);
-        await baglanti.commit();
-        return sonuc;
-    } catch (hata) {
-        await baglanti.rollback();
-        throw hata;
-    } finally {
-        baglanti.release();
-    }
-}
 
 async function yemekleriYaz(baglanti, menuId, yemekIdleri) {
     await baglanti.query(

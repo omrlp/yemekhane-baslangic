@@ -12,12 +12,13 @@ function kullaniciHatasiysaYanitla(hata, res) {
 }
 
 async function yap(req, res) {
-    const menuId = pozitifTamSayi((req.body || {}).menu_id);
+    const { menu_id, porsiyon } = req.body || {};
+    const menuId = pozitifTamSayi(menu_id);
     if (!menuId) {
         return res.status(400).json({ hata: 'menu_id gereklidir.' });
     }
     try {
-        res.status(201).json(await rezervasyonServisi.yap(req.kullanici.id, menuId));
+        res.status(201).json(await rezervasyonServisi.yap(req.kullanici.id, menuId, porsiyon));
     } catch (hata) {
         if (!kullaniciHatasiysaYanitla(hata, res)) throw hata;
     }

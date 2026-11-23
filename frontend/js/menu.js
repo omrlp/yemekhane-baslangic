@@ -63,6 +63,16 @@ function menuyuCiz(menu) {
         }
 
         satir.append(ad, alt, rozetler);
+
+        //secılen alerjenler varsa uyarı gosterıleck
+        const uyari = yemek.uyari_alerjenler || [];
+        if (uyari.length > 0) {
+            satir.classList.add('yemek-uyarili');
+            const uyariKutusu = document.createElement('div');
+            uyariKutusu.className = 'yemek-uyari';
+            uyariKutusu.textContent = `⚠ Alerjen uyarısı: ${uyari.join(', ')}`;
+            satir.appendChild(uyariKutusu);
+        }
         liste.appendChild(satir);
     }
 

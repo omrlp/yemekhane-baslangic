@@ -1,15 +1,16 @@
 //stored procedure alanı en aktıf burda kullanıyorum
 const rezervasyonRepository = require('../repositories/rezervasyonRepository');
 
-async function yap(kullaniciId, menuId) {
-    // Yazma ve bakıye: kaynaktan procedure olsrak.
-    const sonuc = await rezervasyonRepository.yap(kullaniciId, menuId);
+async function yap(kullaniciId, menuId, porsiyon) {
+    const sonuc = await rezervasyonRepository.yap(kullaniciId, menuId, porsiyon || 'tam');
 
+    
     const bosYer = await rezervasyonRepository.bosYerKaynaktan(menuId);
 
-    console.log(`[rezervasyon] kullanici=${kullaniciId} menu=${menuId} rezervasyon=${sonuc.rezervasyon_id} (bakiye ve boş yer kaynaktan okundu)`);
+    console.log(`[rezervasyon] kullanici=${kullaniciId} menu=${menuId} porsiyon=${sonuc.porsiyon} rezervasyon=${sonuc.rezervasyon_id} (bakiye ve boş yer kaynaktan okundu)`);
     return {
         rezervasyon_id: Number(sonuc.rezervasyon_id),
+        porsiyon: sonuc.porsiyon,
         ucret: Number(sonuc.ucret),
         bakiye: Number(sonuc.bakiye),
         bos_yer: bosYer
@@ -25,6 +26,7 @@ async function listele(kullaniciId) {
         yemekhane: s.yemekhane,
         ogun: s.ogun,
         durum: s.durum,
+        porsiyon: s.porsiyon,
         ucret: Number(s.ucret),
         rezervasyon_son: s.rezervasyon_son,
         iptal_edilebilir: Boolean(Number(s.iptal_edilebilir))

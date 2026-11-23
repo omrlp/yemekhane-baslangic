@@ -15,7 +15,7 @@ async function gunluk(req, res) {
         return res.status(400).json({ hata: 'yemekhane_id ve ogun_id gereklidir.' });
     }
 
-    const menu = await menuServisi.gunlukMenuGetir(yemekhaneId, ogunId, req.kullanici.rol);
+    const menu = await menuServisi.gunlukMenuGetir(yemekhaneId, ogunId, req.kullanici);
     if (!menu) {
         return res.status(404).json({ hata: 'Bu yemekhane ve öğün için bugün menü yok.' });
     }

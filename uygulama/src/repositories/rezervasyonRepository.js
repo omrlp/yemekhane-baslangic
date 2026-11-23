@@ -1,8 +1,8 @@
 const db = require('../db');
 const { yordamCagir } = require('./yordam');
 
-const yap = (kullaniciId, menuId) =>
-    yordamCagir('CALL sp_rezervasyon_yap(?, ?)', [kullaniciId, menuId]);
+const yap = (kullaniciId, menuId, porsiyon) =>
+    yordamCagir('CALL sp_rezervasyon_yap(?, ?, ?)', [kullaniciId, menuId, porsiyon]);
 
 const iptalEt = (kullaniciId, rezervasyonId) =>
     yordamCagir('CALL sp_rezervasyon_iptal(?, ?)', [kullaniciId, rezervasyonId]);
@@ -17,7 +17,7 @@ async function bosYerKaynaktan(menuId) {
 
 async function kullanicininRezervasyonlari(kullaniciId) {
     const [satirlar] = await db.replica.execute(
-        `SELECT r.id, r.menu_id, r.durum, r.ucret,
+        `SELECT r.id, r.menu_id, r.durum, r.porsiyon, r.ucret,
                 m.tarih, yh.ad AS yemekhane, o.ad AS ogun,
                 TIMESTAMP(m.tarih, o.son_saat) AS rezervasyon_son,
                 (r.durum = 'aktif' AND TIMESTAMP(m.tarih, o.son_saat) > NOW()) AS iptal_edilebilir
