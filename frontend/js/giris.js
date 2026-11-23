@@ -12,6 +12,7 @@ function gorunumuAyarla(kullanici) {
     if (kullanici) {
         document.getElementById('selam').textContent = `Merhaba, ${kullanici.ad} ${kullanici.soyad}`;
         document.getElementById('rolBilgi').textContent = `Rol: ${kullanici.rol}`;
+        document.getElementById('yonetimBaglantisi').hidden = kullanici.rol !== 'yonetici';
         girisBolumu.hidden = true;
         oturumBolumu.hidden = false;
     } else {

@@ -4,6 +4,8 @@ const authRoutes = require('./routes/authRoutes');
 const menuRoutes = require('./routes/menuRoutes');
 const rezervasyonRoutes = require('./routes/rezervasyonRoutes');
 const bakiyeRoutes = require('./routes/bakiyeRoutes');
+const degerlendirmeRoutes = require('./routes/degerlendirmeRoutes');
+const yonetimRoutes = require('./routes/yonetimRoutes');
 
 const app = express();
 const port = Number(process.env.PORT || 8000);
@@ -16,6 +18,8 @@ app.use('/api', authRoutes);
 app.use('/api', menuRoutes);
 app.use('/api', rezervasyonRoutes);
 app.use('/api', bakiyeRoutes);
+app.use('/api', degerlendirmeRoutes);
+app.use('/api', yonetimRoutes);
 
 app.use('/api', (req, res) => res.status(404).json({ hata: 'Böyle bir adres yok.' }));
 

@@ -71,3 +71,21 @@
                   padding: 0.65rem 0; border-bottom: 1px solid var(--cizgi); }
 .tutar-artti { color: var(--basari); }
 .tutar-azaldi { color: var(--hata); }
+
+/* Değerlendirme */
+.degerlendirme-formu { display: grid; gap: 0.6rem; margin-top: 0.6rem; }
+.degerlendirme-formu textarea { resize: vertical; }
+.verilen-puan { margin-top: 0.4rem; font-weight: 600; color: var(--ana-koyu); }
+@media (max-width: 479px) { .degerlendirme-formu .dugme { width: 100%; } }
+
+/* Yönetici paneli */
+.yonetim-yeni { align-self: end; }
+.yonetim-formu { border: 1px solid var(--cizgi); border-radius: var(--kose);
+                 padding: 1rem; margin-bottom: 1.25rem; background: var(--zemin); }
+.yonetim-formu .secimler { margin-bottom: 0.75rem; }
+.yemek-secimi fieldset { border: 0; border-top: 1px solid var(--cizgi); margin: 0 0 0.5rem; padding: 0.5rem 0 0; }
+.yemek-secimi legend { font-weight: 700; padding-right: 0.5rem; }
+.yemek-secenek { display: flex; align-items: center; gap: 0.4rem; font-weight: 400;
+                 min-height: 36px; margin: 0; }
+.yemek-secenek input { width: auto; flex: none; }
+@media (max-width: 479px) { .yonetim-yeni .dugme, .yonetim-formu .eylemler .dugme { width: 100%; } }
