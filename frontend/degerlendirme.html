@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Değerlendirme · Yemekhane</title>
+  <link rel="stylesheet" href="/css/temel.css">
+  <link rel="stylesheet" href="/css/uygulama.css">
+</head>
+<body>
+  <main class="kapsayici">
+    <section class="fis genis">
+      <h1>Değerlendirme</h1>
+      <p class="alt">Yemek yediğiniz menülere 1–5 puan verin ve yorum yazın.</p>
+
+      <p id="bildirim" class="bildirim bildirim-hata" role="alert" hidden></p>
+
+      <ul class="rez-listesi" id="menuListesi"></ul>
+
+      <div class="eylemler" style="margin-top: 1.25rem;">
+        <a class="dugme dugme-ikincil" href="/rezervasyonlarim.html">Rezervasyonlarım</a>
+        <a class="dugme dugme-ikincil" href="/index.html">Ana sayfa</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/degerlendirme.js"></script>
+</body>
+</html>
